@@ -5,16 +5,20 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv/config');
+const authJwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler');
 
-
+//Cors
 app.use(cors());
 app.options('*', cors())
 
-//middleware
+//Middleware
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
+app.use(authJwt());
+app.use(errorHandler);
 
-
+//Environmental variables
 const PORT = process.env.PORT | 3000
 const api = process.env.API_URL;
 

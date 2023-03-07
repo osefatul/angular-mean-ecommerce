@@ -1,4 +1,4 @@
-### Signup
+### Create a product
 POST http://localhost:3000/api/v1/products
 Content-Type: application/json
 
@@ -9,3 +9,20 @@ Content-Type: application/json
 }
 
 
+
+
+### Signup
+POST http://localhost:3000/api/v1/users/
+Content-Type: application/json
+{
+    "name": "Omar",
+    "email": "omar@gmail.com",
+    "password": "Password5%",
+    "phone": "7826165",
+    "isAdmin": true,
+    "street": "62323 delat",
+    "apartment": "12342",
+    "zip": "v7xe23",
+    "city": "Richmond",
+    "country": "US",
+}
