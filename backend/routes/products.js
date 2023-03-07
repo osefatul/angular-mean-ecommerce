@@ -11,6 +11,8 @@ router.get(`/`, async (req, res) =>{
     res.send(productList);
 })
 
+
+//Create a new product
 router.post(`/`, (req, res) =>{
     const product = new Product({
         name: req.body.name,
