@@ -1,0 +1,11 @@
+### Signup
+POST http://localhost:3000/api/v1/products
+Content-Type: application/json
+
+{
+    "name": "first",
+    "image": "see_url.jpg",
+    "countInStock": "5"
+}
+
+

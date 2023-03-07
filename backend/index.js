@@ -6,6 +6,15 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv/config');
 
+
+app.use(cors());
+app.options('*', cors())
+
+//middleware
+app.use(bodyParser.json());
+app.use(morgan('tiny'));
+
+
 const PORT = process.env.PORT | 3000
 const api = process.env.API_URL;
 
