@@ -5,6 +5,12 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
 
+
+
+
+
+
+// -------------
 const FILE_TYPE_MAP = {
     'image/png': 'png',
     'image/jpeg': 'jpeg',
@@ -27,7 +33,6 @@ const storage = multer.diskStorage({
         cb(null, `${fileName}-${Date.now()}.${extension}`);
     }
 });
-
 const uploadOptions = multer({ storage: storage });
 
 
