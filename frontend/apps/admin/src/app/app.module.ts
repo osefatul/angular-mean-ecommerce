@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule, HttpClient } from '@angular/common/http'; 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
@@ -38,9 +38,10 @@ const UX_MODULE = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
-    UX_MODULE
+    HttpClientModule,
+    UX_MODULE,
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent],
   exports: [
     DashboardComponent,
