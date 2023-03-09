@@ -1,3 +1,4 @@
+import { UiModule } from './../../../../libs/ui/src/lib/ui.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -20,6 +21,7 @@ import { FooterComponent } from './shared/footer/footer.component';
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
+    UiModule
   ],
   providers: [],
   bootstrap: [AppComponent],
