@@ -22,8 +22,9 @@ export class CategoriesListComponent implements OnInit {
 
 
     private _getCategories() {
-      this.categoriesService.getCategories().subscribe(cat => {
-        console.log(cat)
+      this.categoriesService.getCategories().subscribe(cats => {
+        // console.log(cat)
+        this.categories = cats
       })
     }
 }
