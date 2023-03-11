@@ -12,7 +12,8 @@
               styleClass="p-button-primary mr-2"
               [label]="editMode ? 'Update' : 'Create'"
               icon="pi pi-plus"
-            ></p-button>
+              (click)="onSubmit()">
+            </p-button>
             <p-button
               styleClass="p-button-secondary"
               label="Cancel"
@@ -33,6 +34,9 @@
               formControlName="name" 
               id="name" type="text" 
               class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+              <small *ngIf="categoryForm.name.invalid && isSubmitted" class="p-error">
+                Name is required
+              </small>
             </div>
             <div class="field col">
               <label for="icon">Icon</label>
@@ -41,6 +45,9 @@
               id="lastname2" 
               formControlName="name" 
               class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+              <small *ngIf="categoryForm.icon.invalid && isSubmitted" class="p-error">
+                icon is required
+              </small>
             </div>
             <div class="field col">
               <label for="color">Color</label><br />
@@ -52,3 +59,6 @@
     </div>
   </p-card>
 </div>
+
+
+{{catForm.value | json}}

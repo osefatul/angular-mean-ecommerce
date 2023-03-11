@@ -24,12 +24,20 @@ export class CategoriesFormComponent implements OnInit {
       icon: new FormControl ('', [Validators.required]),
       color: new FormControl ('#fff')
     });
-    
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
 
+    ngOnInit(): void {
+      console.log(this.catForm.value)
+      // console.log(this.catForm.controls.name)
+    }
 
-    // ngOnInit(): void {}
+    onSubmit(){
+      this.categoriesService.createCategory(this.catForm.value).subscribe(res=>{
+        console.log(res)
+      })
+    }
     
+
+    get categoryForm(){
+      return this.catForm.controls
+    }
 }
