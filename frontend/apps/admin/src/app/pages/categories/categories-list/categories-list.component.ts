@@ -1,5 +1,4 @@
-import { Category } from 'libs/products/src';
-import { CategoriesService } from 'libs/products/src';
+import { CategoriesService,Category } from 'libs/products/src';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
