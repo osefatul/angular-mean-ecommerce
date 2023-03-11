@@ -13,6 +13,7 @@ import {CardModule} from 'primeng/card';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from "primeng/button";
 import {TableModule} from 'primeng/table';
+import { CategoriesService } from '@ecommerce/products';
 
 const UX_MODULE = [
   CardModule,
@@ -41,7 +42,7 @@ const UX_MODULE = [
     HttpClientModule,
     UX_MODULE,
   ],
-  providers: [HttpClient],
+  providers: [HttpClient, CategoriesService],
   bootstrap: [AppComponent],
   exports: [
     DashboardComponent,
