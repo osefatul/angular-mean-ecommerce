@@ -1,6 +1,7 @@
 import { CategoriesService,Category } from 'libs/products/src';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'admin-categories-list',
@@ -11,19 +12,52 @@ export class CategoriesListComponent implements OnInit {
   categories: Category[]=[]
 
   constructor(
-    private categoriesService:CategoriesService,
-    private router:Router
-    ){}
+    private categoriesService: CategoriesService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private router: Router
+  ) {}
 
     ngOnInit(): void {
-      this._getCategories();
+      this.getCategories();
     }
 
 
-    private _getCategories() {
+    private getCategories() {
       this.categoriesService.getCategories().subscribe(cats => {
         // console.log(cat)
         this.categories = cats
       })
+    }
+
+    updateCategory(categoryId: string) {
+      this.router.navigateByUrl(`categories/form/${categoryId}`);
+    }
+
+    deleteCategory(categoryId: string) {      
+      this.confirmationService.confirm({
+        message: 'Do you want to Delete this Category?',
+        header: 'Delete Category',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.categoriesService.deleteCategory(categoryId).subscribe(
+            () => {
+              this.getCategories();
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: 'Category is deleted!'
+              });
+            },
+            () => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Category is not deleted!'
+              });
+            }
+          );
+        }
+      });
     }
 }

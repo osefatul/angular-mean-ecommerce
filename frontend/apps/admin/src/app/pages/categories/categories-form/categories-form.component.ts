@@ -41,7 +41,9 @@ export class CategoriesFormComponent implements OnInit {
       this.isSubmitted = true;
       if(this.catForm.invalid) return ;
 
-      this.addCategory(this.catForm.value)
+      this.editMode ?
+      this.addCategory(this.catForm.value):
+      this.updateCategory(this.catForm.value);
     }
 
 
@@ -67,6 +69,49 @@ export class CategoriesFormComponent implements OnInit {
           });
         }
       );
+    }
+
+    private updateCategory(category: Category) {
+      this.categoriesService.updateCategory(category).subscribe(
+        () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Category is updated!'
+          });
+          timer(2000)
+            .toPromise()
+            .then(() => {
+              this.location.back();
+            });
+        },
+        () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Category is not updated!'
+          });
+        }
+      );
+    }
+
+
+    // private _checkEditMode() {
+    //   this.route.params.subscribe((params) => {
+    //     if (params.id) {
+    //       this.editMode = true;
+    //       this.currentCategoryId = params.id;
+    //       this.categoriesService.getCategory(params.id).subscribe((category) => {
+    //         this.categoryForm.name.setValue(category.name);
+    //         this.categoryForm.icon.setValue(category.icon);
+    //         this.categoryForm.color.setValue(category.color);
+    //       });
+    //     }
+    //   });
+    // }
+
+    cancel(){
+      this.location.back();
     }
     
 

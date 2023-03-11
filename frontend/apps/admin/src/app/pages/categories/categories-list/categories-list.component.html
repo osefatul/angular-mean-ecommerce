@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="admin-page">
   <p-card header="Categories" subheader="List of all categories">
     <div class="gird">
@@ -40,11 +41,13 @@
               </td>
               <td class="cell">
                 <p-button
+                (click)="deleteCategory(category.id)"
                   class=""
                   styleClass="p-button-danger p-mr-2"
                   icon="pi pi-trash"
                 ></p-button>
                 <p-button
+                (click)="updateCategory(category.id)"
                   styleClass="p-button-success"
                   icon="pi pi-pencil"
                 ></p-button>
@@ -57,3 +60,8 @@
     
 </p-card>
 </div>
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmDialog>
