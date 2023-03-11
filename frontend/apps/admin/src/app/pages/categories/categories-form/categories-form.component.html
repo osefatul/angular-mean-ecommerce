@@ -1,4 +1,4 @@
-
+<p-toast></p-toast>
 <div class="admin-page">
   <p-card
     [header]="editMode ? 'Edit Category' : 'Add Category'"
@@ -43,7 +43,7 @@
               <input 
               type="text"
               id="lastname2" 
-              formControlName="name" 
+              formControlName="icon" 
               class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
               <small *ngIf="categoryForm.icon.invalid && isSubmitted" class="p-error">
                 icon is required

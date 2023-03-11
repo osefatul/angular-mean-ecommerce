@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService,Category } from 'libs/products/src';
+import { MessageService } from 'primeng/api';
+import { timer } from 'rxjs';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -16,7 +19,11 @@ export class CategoriesFormComponent implements OnInit {
   currentCategoryId:string;
 
   constructor(
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private location: Location,
+    private route: ActivatedRoute,
+    private messageService: MessageService,
+
     ){}
     
     catForm = new FormGroup({
@@ -31,9 +38,35 @@ export class CategoriesFormComponent implements OnInit {
     }
 
     onSubmit(){
-      this.categoriesService.createCategory(this.catForm.value).subscribe(res=>{
-        console.log(res)
-      })
+      this.isSubmitted = true;
+      if(this.catForm.invalid) return ;
+
+      this.addCategory(this.catForm.value)
+    }
+
+
+    private addCategory(category: Category) {
+      this.categoriesService.createCategory(category).subscribe(
+        (category: Category) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `Category ${category.name} is created!`
+          });
+          timer(2000)
+            .toPromise()
+            .then(() => {
+              this.location.back();
+            });
+        },
+        () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Category is not created!'
+          });
+        }
+      );
     }
     
 
