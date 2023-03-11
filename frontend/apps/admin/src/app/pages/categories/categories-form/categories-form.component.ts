@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService,Category } from 'libs/products/src';
 
@@ -9,8 +9,8 @@ import { CategoriesService,Category } from 'libs/products/src';
   templateUrl: './categories-form.component.html',
   styles: [],
 })
-export class CategoriesFormComponent {
-  form:FormGroup;
+export class CategoriesFormComponent implements OnInit {
+
   isSubmitted = false;
   editMode = false;
   currentCategoryId:string;
@@ -18,6 +18,18 @@ export class CategoriesFormComponent {
   constructor(
     private categoriesService: CategoriesService
     ){}
+    
+    catForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      icon: new FormControl ('', [Validators.required]),
+      color: new FormControl ('#fff')
+    });
+    
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
+
+    // ngOnInit(): void {}
     
 }
