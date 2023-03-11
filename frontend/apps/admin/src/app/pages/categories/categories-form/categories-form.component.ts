@@ -9,4 +9,15 @@ import { CategoriesService,Category } from 'libs/products/src';
   templateUrl: './categories-form.component.html',
   styles: [],
 })
-export class CategoriesFormComponent {}
+export class CategoriesFormComponent {
+  form:FormGroup;
+  isSubmitted = false;
+  editMode = false;
+  currentCategoryId:string;
+
+  constructor(
+    private categoriesService: CategoriesService
+    ){}
+
+    
+}

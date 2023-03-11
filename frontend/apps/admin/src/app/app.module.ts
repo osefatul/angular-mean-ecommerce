@@ -11,22 +11,28 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
+import { CategoriesService } from '@ecommerce/products';
 
 import {CardModule} from 'primeng/card';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from "primeng/button";
 import {TableModule} from 'primeng/table';
-import { CategoriesService } from '@ecommerce/products';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ColorPickerModule } from 'primeng/colorpicker';
+
 
 const UX_MODULE = [
   CardModule,
   ToolbarModule,
   ButtonModule,
   TableModule,
-  // ToastModule,
-  // InputTextModule,
-  // ConfirmDialogModule,
-  // ColorPickerModule
+  InputTextModule,
+  ToastModule,
+  ConfirmDialogModule,
+  ColorPickerModule
 ];
 
 
