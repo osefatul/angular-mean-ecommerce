@@ -42,7 +42,7 @@ export class CategoriesListComponent implements OnInit {
         accept: () => {
           this.categoriesService.deleteCategory(categoryId).subscribe(
             () => {
-              this.getCategories();
+              this.getCategories();// call getCategories again
               this.messageService.add({
                 severity: 'success',
                 summary: 'Success',

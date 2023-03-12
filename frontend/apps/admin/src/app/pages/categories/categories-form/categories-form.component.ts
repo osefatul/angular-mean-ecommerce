@@ -22,28 +22,34 @@ export class CategoriesFormComponent implements OnInit {
     private categoriesService: CategoriesService,
     private location: Location,
     private route: ActivatedRoute,
-    private messageService: MessageService,
-
-    ){}
+    private messageService: MessageService,){}
     
     catForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       icon: new FormControl ('', [Validators.required]),
-      color: new FormControl ('#fff')
+      color: new FormControl ('#fff', [Validators.required])
     });
 
     ngOnInit(): void {
       console.log(this.catForm.value)
       // console.log(this.catForm.controls.name)
+      this._checkEditMode();
     }
 
     onSubmit(){
       this.isSubmitted = true;
       if(this.catForm.invalid) return ;
 
+      const category: Category = {
+        id: this.currentCategoryId,
+        name: this.categoryForm.name.value,
+        icon: this.categoryForm.icon.value,
+        color: this.categoryForm.color.value
+      };
+
       this.editMode ?
-      this.addCategory(this.catForm.value):
-      this.updateCategory(this.catForm.value);
+      this.updateCategory(category):
+      this.addCategory(category)
     }
 
 
@@ -96,19 +102,19 @@ export class CategoriesFormComponent implements OnInit {
     }
 
 
-    // private _checkEditMode() {
-    //   this.route.params.subscribe((params) => {
-    //     if (params.id) {
-    //       this.editMode = true;
-    //       this.currentCategoryId = params.id;
-    //       this.categoriesService.getCategory(params.id).subscribe((category) => {
-    //         this.categoryForm.name.setValue(category.name);
-    //         this.categoryForm.icon.setValue(category.icon);
-    //         this.categoryForm.color.setValue(category.color);
-    //       });
-    //     }
-    //   });
-    // }
+    private _checkEditMode() {
+      this.route.params.subscribe((params) => {
+        if (params['id']) {
+          this.editMode = true;
+          this.currentCategoryId = params['id'];
+          this.categoriesService.getCategory(params['id']).subscribe((category) => {
+            this.categoryForm.name.setValue(category.name);
+            this.categoryForm.icon.setValue(category.icon);
+            this.categoryForm.color.setValue(category.color);
+          });
+        }
+      });
+    }
 
     cancel(){
       this.location.back();
