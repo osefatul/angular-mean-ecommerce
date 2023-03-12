@@ -1,8 +1,8 @@
 <p-toast></p-toast>
 <div class="admin-page">
   <p-card header="Products" subheader="List of all products">
-    <div class="p-grid">
-      <div class="p-col-12">
+    <div class="grid">
+      <div class="col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left">
             <p-button
@@ -15,30 +15,33 @@
         </p-toolbar>
       </div>
     </div>
-    <div class="p-grid">
-      <div class="p-col-12">
+
+    <div class="grid">
+      <div class="col-12">
         <p-table
           [paginator]="true"
           [rows]="10"
           [value]="products"
           styleClass="p-datatable-gridlines"
-          [globalFilterFields]="['name']"
-        >
+          [globalFilterFields]="['name']">
           <ng-template pTemplate="header">
             <tr>
-              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th pSortableColumn="name">Name 
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
               <th>Image</th>
               <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
               <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
-              <th pSortableColumn="category">
-                Category <p-sortIcon field="category"></p-sortIcon>
+              <th pSortableColumn="category">Category 
+                <p-sortIcon field="category"></p-sortIcon>
               </th>
-              <th pSortableColumn="created">
-                Created at <p-sortIcon field="created"></p-sortIcon>
+              <th pSortableColumn="created">Created at 
+                <p-sortIcon field="created"></p-sortIcon>
               </th>
               <th></th>
             </tr>
           </ng-template>
+
           <ng-template pTemplate="body" let-product>
             <tr>
               <td>{{ product.name }}</td>
@@ -50,14 +53,14 @@
               <td>
                 <p-button
                 (click)="deleteProduct(product.id)"
-                  styleClass="p-button-danger p-mr-2"
-                  icon="pi pi-trash"
-                ></p-button>
+                  styleClass="p-button-danger mr-2"
+                  icon="pi pi-trash">
+                </p-button>
                 <p-button
                 (click)="updateProduct(product.id)"
                   styleClass="p-button-success"
-                  icon="pi pi-pencil"
-                ></p-button>
+                  icon="pi pi-pencil">
+                </p-button>
               </td>
             </tr>
           </ng-template>

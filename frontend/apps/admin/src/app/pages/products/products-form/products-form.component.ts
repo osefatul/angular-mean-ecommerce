@@ -32,7 +32,7 @@ export class ProductsFormComponent implements OnInit {
   prodForm = new FormGroup({
     name: new FormControl ("", [Validators.required]),
     brand: new FormControl ("", [Validators.required]),
-    price: new FormControl ([Validators.required]),
+    price: new FormControl (0, [Validators.required]),
     category: new FormControl ("" , [Validators.required]),
     countInStock: new FormControl ("", [Validators.required]),
     description: new FormControl ("", [Validators.required]),
@@ -56,20 +56,24 @@ export class ProductsFormComponent implements OnInit {
     });
   }
 
+  onCancel(){
+    this.location.back();
+  }
+
 
   onSubmit() {
     this.isSubmitted = true;
     if (this.prodForm.invalid) return;
 
+    //WE ARE SENDING A FORMDATA, NOT A JSON BCOZ WE HAVE A FILE.
     const productFormData = new FormData();
     Object.keys(this.productForm).map((key) => {
       productFormData.append(key, this.productForm[key].value);
     });
-    if (this.editMode) {
-      this._updateProduct(productFormData);
-    } else {
-      this._addProduct(productFormData);
-    }
+
+    this.editMode? 
+    this._updateProduct(productFormData):
+    this._addProduct(productFormData)
   }
 
 
@@ -88,6 +92,8 @@ export class ProductsFormComponent implements OnInit {
           this.productForm.description.setValue(product.description);
           this.productForm.richDescription.setValue(product.richDescription);
           this.imageDisplay = product.image;
+
+          //if we don't wanna send an image with update form we need to switch off validators for it.
           this.productForm.image.setValidators([]);
           this.productForm.image.updateValueAndValidity();
         });
@@ -158,9 +164,4 @@ export class ProductsFormComponent implements OnInit {
       fileReader.readAsDataURL(file);
     }
   }
-
-
-
-
-
 }
