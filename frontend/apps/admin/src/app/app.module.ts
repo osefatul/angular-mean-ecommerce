@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
@@ -14,17 +14,17 @@ import { CategoriesFormComponent } from './pages/categories/categories-form/cate
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
 import { CategoriesService } from '@ecommerce/products';
 
-import {CardModule} from 'primeng/card';
-import {ToolbarModule} from 'primeng/toolbar';
-import {ButtonModule} from "primeng/button";
-import {TableModule} from 'primeng/table';
+import { CardModule } from 'primeng/card';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import {ColorPickerModule} from 'primeng/colorpicker';
-
-
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { ProductsListComponent } from './pages/products/products-list/products-list.component';
+import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 
 const UX_MODULE = [
   CardModule,
@@ -34,9 +34,8 @@ const UX_MODULE = [
   InputTextModule,
   ToastModule,
   ConfirmDialogModule,
-  ColorPickerModule
+  ColorPickerModule,
 ];
-
 
 @NgModule({
   declarations: [
@@ -45,7 +44,9 @@ const UX_MODULE = [
     SidebarComponent,
     ShellComponent,
     CategoriesFormComponent,
-    CategoriesListComponent
+    CategoriesListComponent,
+    ProductsListComponent,
+    ProductsFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +63,8 @@ const UX_MODULE = [
     DashboardComponent,
     SidebarComponent,
     ShellComponent,
+    ProductsListComponent,
+    ProductsFormComponent,
   ],
 })
 export class AppModule {}
