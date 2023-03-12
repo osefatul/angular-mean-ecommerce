@@ -1,6 +1,6 @@
 # E-commerce monorepo
 
-- create a new workspace:`npx create-nx-workspace@latest`
+- Create a new workspace:`npx create-nx-workspace@latest`
     - choose integrated monorepo
     - choose angular
 
@@ -22,4 +22,20 @@
     - install Flex which is another library from primeeng for flex and grid support:
     ```javascript
     npm install primeflex --save
+    ```
+- Creating a shortcut can be done under `path` in `tsconfig.base.json`:
+- For creating `environment` files, 
+    - Create a folder in the root directory and add two files; one for production and other for development.
+    - Go to `project.json` file and add below lines in `configuration.production`:
+    ```javascript
+        "fileReplacements": [
+        {
+            "replace": "apps/ngshop/src/environments/environment.ts",
+            "with": "apps/ngshop/src/environments/environment.prod.ts"
+        }
+        ],
+    ```
+    - Add a path for environment under `paths` in `tsconfig.base.json`:
+    ```javascript
+        "@env/*":["environments/*"]
     ```

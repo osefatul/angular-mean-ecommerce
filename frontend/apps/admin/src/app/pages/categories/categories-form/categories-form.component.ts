@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { CategoriesService,Category } from 'libs/products/src';
+// import { CategoriesService,Category } from 'libs/products/src';
+import { CategoriesService,Category } from '@ecommerce/products';
 import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';
 import { Location } from '@angular/common';
