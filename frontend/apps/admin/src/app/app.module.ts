@@ -27,14 +27,16 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {InputSwitchModule} from 'primeng/inputswitch';
-import {DropdownModule} from 'primeng/dropdown';
-import {InputTextareaModule} from 'primeng/inputtextarea';
-import {EditorModule} from 'primeng/editor';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { EditorModule } from 'primeng/editor';
 import { TagModule } from 'primeng/tag';
-import {InputMaskModule} from 'primeng/inputmask';
-
+import { InputMaskModule } from 'primeng/inputmask';
+import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
+import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
+import {FieldsetModule} from 'primeng/fieldset';
 
 
 const UX_MODULE = [
@@ -52,7 +54,8 @@ const UX_MODULE = [
   InputTextareaModule,
   EditorModule,
   TagModule,
-  InputMaskModule
+  InputMaskModule,
+  FieldsetModule
 ];
 
 @NgModule({
@@ -66,7 +69,9 @@ const UX_MODULE = [
     ProductsListComponent,
     ProductsFormComponent,
     UsersListComponent,
-    UsersFormComponent
+    UsersFormComponent,
+    OrdersListComponent,
+    OrdersDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +90,8 @@ const UX_MODULE = [
     ShellComponent,
     ProductsListComponent,
     ProductsFormComponent,
+    OrdersListComponent,
+    OrdersDetailComponent,
   ],
 })
 export class AppModule {}

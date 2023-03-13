@@ -51,17 +51,22 @@ export class UsersFormComponent implements OnInit {
   }
 
 
-  //Fetch countries from library
-  private getCountries () {
-    countriesLib.registerLocale(require("i18n-iso-countries/langs/en.json"));
-    this.countries = Object.entries(countriesLib.getNames("en", {select: "official"})).map(entry =>{
-      return {
-        id: entry[0],
-        name: entry[1]
-      }
-    })
-    console.log(this.countries);
+  private getCountries() {
+    this.countries = this.usersService.getCountries();
   }
+
+
+  //Fetch countries from library
+  // private getCountries () {
+  //   countriesLib.registerLocale(require("i18n-iso-countries/langs/en.json"));
+  //   this.countries = Object.entries(countriesLib.getNames("en", {select: "official"})).map(entry =>{
+  //     return {
+  //       id: entry[0],
+  //       name: entry[1]
+  //     }
+  //   })
+  //   console.log(this.countries);
+  // }
 
 
   private _addUser(user: User) {
