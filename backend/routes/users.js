@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 
 //return all users list
 router.get(`/`, async (req, res) =>{
-
     //every field except passwordHash
     const userList = await User.find().select('-passwordHash');
     if(!userList) {
@@ -17,7 +16,7 @@ router.get(`/`, async (req, res) =>{
     res.send(userList);
 })
 
-
+//create new user
 router.post('/', async (req,res)=>{
     let user = new User({
         name: req.body.name,
@@ -32,14 +31,10 @@ router.post('/', async (req,res)=>{
         country: req.body.country,
     })
     user = await user.save();
-
     if(!user)
     return res.status(400).send('the user cannot be created!')
     res.send(user);
 })
-
-
-
 
 
 //get a specific user.
@@ -54,7 +49,6 @@ router.get('/:id', async(req,res)=>{
 })
 
 
-
 //update a specific user
 router.put('/:id',async (req, res)=> {
     const userExist = await User.findById(req.params.id);
@@ -64,28 +58,13 @@ router.put('/:id',async (req, res)=> {
     } else {
         newPassword = userExist.passwordHash;
     }
-
     const user = await User.findByIdAndUpdate(
         req.params.id,
-        // {
-        //     name: req.body.name,
-        //     email: req.body.email,
-        //     passwordHash: newPassword,
-        //     phone: req.body.phone,
-        //     isAdmin: req.body.isAdmin,
-        //     street: req.body.street,
-        //     apartment: req.body.apartment,
-        //     zip: req.body.zip,
-        //     city: req.body.city,
-        //     country: req.body.country,
-        // },
         { $set: req.body },
         { new: true}
     )
-
     if(!user)
     return res.status(400).send('the user cannot be created!')
-
     res.send(user);
 })
 
@@ -98,7 +77,6 @@ router.post('/login', async (req,res) => {
     if(!user) {
         return res.status(400).send('The user not found');
     }
-
     if(user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
         const token = jwt.sign(
             {
@@ -112,11 +90,8 @@ router.post('/login', async (req,res) => {
     } else {
         res.status(400).send('password is wrong!');
     }
-
     
 })
-
-
 
 
 //register a new user
@@ -134,14 +109,10 @@ router.post('/register', async (req,res)=>{
         country: req.body.country,
     })
     user = await user.save();
-
     if(!user)
     return res.status(400).send('the user cannot be created!')
-
     res.send(user);
 })
-
-
 
 
 //delete a user
@@ -156,7 +127,6 @@ router.delete('/:id', (req, res)=>{
         return res.status(500).json({success: false, error: err}) 
     })
 })
-
 
 
 //get counts of users

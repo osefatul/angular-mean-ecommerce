@@ -7,7 +7,6 @@ const router = express.Router();
 //get all orders
 router.get(`/`, async (req, res) =>{
     const orderList = await Order.find().populate('user', 'name').sort({'dateOrdered': -1});
-
     if(!orderList) {
         res.status(500).json({success: false})
     } 
@@ -64,13 +63,10 @@ router.post('/', async (req,res)=>{
         user: req.body.user,
     })
     order = await order.save();
-
     if(!order)
     return res.status(400).send('the order cannot be created!')
-
     res.send(order);
 })
-
 
 
 router.put('/:id',async (req, res)=> {
@@ -83,12 +79,8 @@ router.put('/:id',async (req, res)=> {
     )
     if(!order)
     return res.status(400).send('the order cannot be update!')
-
     res.send(order);
 })
-
-
-
 
 //delete
 router.delete('/:id', (req, res)=>{
@@ -107,13 +99,11 @@ router.delete('/:id', (req, res)=>{
 })
 
 
-
 //total sale
 router.get('/get/totalsales', async (req, res)=> {
     const totalSales= await Order.aggregate([
         { $group: { _id: null , totalsales : { $sum : '$totalPrice'}}}
     ])
-
     if(!totalSales) {
         return res.status(400).send('The order sales cannot be generated')
     }
@@ -125,7 +115,6 @@ router.get('/get/totalsales', async (req, res)=> {
 //counter of orders
 router.get(`/get/count`, async (req, res) =>{
     const orderCount = await Order.countDocuments((count) => count)
-
     if(!orderCount) {
         res.status(500).json({success: false})
     } 

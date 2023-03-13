@@ -1,3 +1,4 @@
+import { AuthService } from '@ecommerce/users';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,4 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent {}
+export class SidebarComponent{
+  constructor(private authService: AuthService){}
+
+  logoutUser() {
+    this.authService.logout();
+  }
+}

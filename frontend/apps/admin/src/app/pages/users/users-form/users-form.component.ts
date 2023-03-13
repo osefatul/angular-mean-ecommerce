@@ -5,10 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsersService, User } from '@ecommerce/users';
 import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';
-import * as countriesLib from "i18n-iso-countries"
 
-
-declare const require
 
 @Component({
   selector: 'admin-users-form',

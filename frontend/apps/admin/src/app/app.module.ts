@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
@@ -37,6 +37,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import {FieldsetModule} from 'primeng/fieldset';
+import { JwtInterceptor, UsersModule } from '@ecommerce/users';
 
 
 const UX_MODULE = [
@@ -81,8 +82,16 @@ const UX_MODULE = [
     FormsModule,
     ReactiveFormsModule,
     UX_MODULE,
+    UsersModule,
   ],
-  providers: [CategoriesService, MessageService, ConfirmationService],
+  providers: [
+    CategoriesService, 
+    MessageService, 
+    ConfirmationService,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true
+    }
+  ],          
   bootstrap: [AppComponent],
   exports: [
     DashboardComponent,

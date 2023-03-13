@@ -1,3 +1,4 @@
+import {  AuthGuard } from '@ecommerce/users';
 import { Route } from '@angular/router';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
@@ -14,6 +15,7 @@ export const appRoutes: Route[] = [
     {
         path: '',
         component: ShellComponent,
+        canActivate: [AuthGuard],
         children: [
         {
             path: 'dashboard',

@@ -39,3 +39,7 @@
     ```javascript
         "@env/*":["environments/*"]
     ```
+
+## Authentication
+- Create a new component in the `lib/users`
+- Add login router in the `users.module`
