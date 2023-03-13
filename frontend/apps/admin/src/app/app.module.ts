@@ -13,6 +13,8 @@ import { ShellComponent } from './shared/shell/shell.component';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
 import { CategoriesService } from '@ecommerce/products';
+import { UsersListComponent } from './pages/users/users-list/users-list.component';
+import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -30,8 +32,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {EditorModule} from 'primeng/editor';
-
-
+import { TagModule } from 'primeng/tag';
+import {InputMaskModule} from 'primeng/inputmask';
 
 
 
@@ -48,7 +50,9 @@ const UX_MODULE = [
   InputSwitchModule,
   DropdownModule,
   InputTextareaModule,
-  EditorModule
+  EditorModule,
+  TagModule,
+  InputMaskModule
 ];
 
 @NgModule({
@@ -61,6 +65,8 @@ const UX_MODULE = [
     CategoriesListComponent,
     ProductsListComponent,
     ProductsFormComponent,
+    UsersListComponent,
+    UsersFormComponent
   ],
   imports: [
     BrowserModule,
