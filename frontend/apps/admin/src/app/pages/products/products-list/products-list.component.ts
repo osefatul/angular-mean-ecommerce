@@ -40,8 +40,8 @@ export class ProductsListComponent implements OnInit {
         header: 'Delete Category',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          this.productsService.deleteProduct(categoryId).subscribe(
-            () => {
+          this.productsService.deleteProduct(categoryId).subscribe({
+            complete: () => {
               this.getProducts();// call getCategories again
               this.messageService.add({
                 severity: 'success',
@@ -49,13 +49,14 @@ export class ProductsListComponent implements OnInit {
                 detail: 'Category is deleted!'
               });
             },
-            () => {
+            error: () => {
               this.messageService.add({
                 severity: 'error',
                 summary: 'Error',
                 detail: 'Category is not deleted!'
               });
             }
+          }
           );
         }
       });

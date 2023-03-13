@@ -70,26 +70,30 @@ export class UsersFormComponent implements OnInit {
 
 
   private _addUser(user: User) {
-    this.usersService.createUser(user).subscribe(
-      (user: User) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `User ${user.name} is created!`
-        });
-        timer(2000)
-          .toPromise()
-          .then(() => {
-            this.location.back();
+    this.usersService.createUser(user).subscribe({
+      //complete doesn't work here as we are passing `user` parameter.
+        next: (user: User) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `User ${user.name} is created!`
           });
-      },
-      () => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'User is not created!'
-        });
+          timer(2000)
+            .toPromise()
+            .then(() => {
+              this.location.back();
+            });
+        },
+
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'User is not created!'
+          });
+        }
       }
+    
     );
   }
 

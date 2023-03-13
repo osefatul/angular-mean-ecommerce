@@ -55,8 +55,8 @@ export class CategoriesFormComponent implements OnInit {
 
 
     private addCategory(category: Category) {
-      this.categoriesService.createCategory(category).subscribe(
-        (category: Category) => {
+      this.categoriesService.createCategory(category).subscribe({
+        next: (category: Category) => {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
@@ -68,19 +68,20 @@ export class CategoriesFormComponent implements OnInit {
               this.location.back();
             });
         },
-        () => {
+        error: () => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
             detail: 'Category is not created!'
           });
         }
+      }
       );
     }
 
     private updateCategory(category: Category) {
-      this.categoriesService.updateCategory(category).subscribe(
-        () => {
+      this.categoriesService.updateCategory(category).subscribe({
+        complete:() => {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
@@ -92,13 +93,14 @@ export class CategoriesFormComponent implements OnInit {
               this.location.back();
             });
         },
-        () => {
+        error: () => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
             detail: 'Category is not updated!'
           });
         }
+      }
       );
     }
 

@@ -40,8 +40,8 @@ export class CategoriesListComponent implements OnInit {
         header: 'Delete Category',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          this.categoriesService.deleteCategory(categoryId).subscribe(
-            () => {
+          this.categoriesService.deleteCategory(categoryId).subscribe({
+            complete: () => {
               this.getCategories();// call getCategories again
               this.messageService.add({
                 severity: 'success',
@@ -49,13 +49,16 @@ export class CategoriesListComponent implements OnInit {
                 detail: 'Category is deleted!'
               });
             },
-            () => {
+            error:  () => {
               this.messageService.add({
                 severity: 'error',
                 summary: 'Error',
                 detail: 'Category is not deleted!'
               });
             }
+          }
+
+          
           );
         }
       });

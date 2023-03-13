@@ -103,25 +103,26 @@ export class ProductsFormComponent implements OnInit {
 
 
   private _addProduct(productData: FormData) {
-    this.productsService.createProduct(productData).subscribe(
-      (product: Product) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `Product ${product.name} is created!`
-        });
-        timer(2000)
-          .toPromise()
-          .then(() => {
-            this.location.back();
+    this.productsService.createProduct(productData).subscribe({
+        next: (product: Product) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `Product ${product.name} is created!`
           });
-      },
-      () => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Product is not created!'
-        });
+          timer(2000)
+            .toPromise()
+            .then(() => {
+              this.location.back();
+            });
+        },
+        error:() => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Product is not created!'
+          });
+        }
       }
     );
   }
