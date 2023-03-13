@@ -49,21 +49,22 @@ export class OrdersDetailComponent implements OnInit {
   }
 
   onStatusChange(event) {
-    this.orderService.updateOrder({ status: event.value }, this.order.id).subscribe(
-      () => {
+    this.orderService.updateOrder({ status: event.value }, this.order.id).subscribe({
+      complete:() => {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
           detail: 'Order is updated!'
         });
       },
-      () => {
+      error:() => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
           detail: 'Order is not updated!'
         });
       }
+    }
     );
   }
 

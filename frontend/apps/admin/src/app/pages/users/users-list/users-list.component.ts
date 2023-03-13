@@ -28,8 +28,8 @@ export class UsersListComponent implements OnInit {
       header: 'Delete User',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.usersService.deleteUser(userId).subscribe(
-          () => {
+        this.usersService.deleteUser(userId).subscribe({
+          complete:  () => {
             this._getUsers();
             this.messageService.add({
               severity: 'success',
@@ -37,13 +37,14 @@ export class UsersListComponent implements OnInit {
               detail: 'User is deleted!'
             });
           },
-          () => {
+          error: () => {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
               detail: 'User is not deleted!'
             });
           }
+        }
         );
       }
     });
