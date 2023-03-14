@@ -34,18 +34,17 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       // this.productsService.getProducts().subscribe(prods=>{
       //   this.products = prods
       // })
-    
       this.productsService.getProducts()
       .pipe(takeUntil(this.endSub$))
       .subscribe(prods=>{
         this.products = prods
       })
     }
-
+    
     updateProduct (productId:string){
       this.router.navigateByUrl(`/products/form/${productId}`)
     }
-
+    
     deleteProduct(categoryId: string) {      
       this.confirmationService.confirm({
         message: 'Do you want to Delete this Category?',

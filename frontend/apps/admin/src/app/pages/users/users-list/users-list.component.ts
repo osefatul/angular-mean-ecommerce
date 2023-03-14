@@ -71,7 +71,6 @@ export class UsersListComponent implements OnInit, OnDestroy {
     // this.usersService.getUsers().subscribe((users) => {
     //   this.users = users;
     // });
-
     this.usersService.getUsers()
     .pipe(takeUntil(this.endSub$))
     .subscribe((users) => {
