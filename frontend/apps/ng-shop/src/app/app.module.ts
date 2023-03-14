@@ -9,7 +9,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import {AccordionModule} from 'primeng/accordion';
+import { AccordionModule } from 'primeng/accordion';
+import { NavComponent } from './shared/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -18,15 +19,17 @@ import {AccordionModule} from 'primeng/accordion';
     ProductListComponent,
     HeaderComponent,
     FooterComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     UiModule,
     AccordionModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [NavComponent],
 })
 export class AppModule {}
