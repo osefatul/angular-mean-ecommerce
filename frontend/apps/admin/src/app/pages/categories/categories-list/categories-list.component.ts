@@ -1,5 +1,6 @@
 import { CategoriesService,Category } from 'libs/products/src';
-import { Component, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -8,8 +9,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   templateUrl: './categories-list.component.html',
   styles: [],
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent implements OnInit, OnDestroy  {
   categories: Category[]=[]
+  endSub$: Subject<any> = new Subject();
 
   constructor(
     private categoriesService: CategoriesService,
@@ -22,10 +24,17 @@ export class CategoriesListComponent implements OnInit {
       this.getCategories();
     }
 
+    ngOnDestroy(): void {
+      this.endSub$.complete();
+    }
 
     private getCategories() {
-      this.categoriesService.getCategories().subscribe(cats => {
-        // console.log(cat)
+      // this.categoriesService.getCategories().subscribe(cats => {
+      //   this.categories = cats
+      // })
+
+      this.categoriesService.getCategories()
+      .pipe(takeUntil(this.endSub$)).subscribe(cats => {
         this.categories = cats
       })
     }

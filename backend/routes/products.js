@@ -7,9 +7,6 @@ const multer = require('multer');
 
 
 
-
-
-
 // -------------
 const FILE_TYPE_MAP = {
     'image/png': 'png',
@@ -157,7 +154,7 @@ router.delete('/:id', (req, res) => {
 
 //products counter
 router.get(`/get/count`, async (req, res) => {
-    const productCount = await Product.countDocuments((count) => count);
+    const productCount = await Product.countDocuments();
 
     if (!productCount) {
         res.status(500).json({ success: false });

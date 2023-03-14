@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from '@ecommerce/products';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -9,8 +10,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   templateUrl: './products-list.component.html',
   styles: [],
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent implements OnInit, OnDestroy {
   products = [];
+  endSub$: Subject<any> = new Subject();
 
   constructor(
     private productsService:ProductsService,
@@ -24,8 +26,18 @@ export class ProductsListComponent implements OnInit {
       this.getProducts();
     }
 
+    ngOnDestroy(): void {
+        this.endSub$.complete();
+    }
+
     private getProducts (){
-      this.productsService.getProducts().subscribe(prods=>{
+      // this.productsService.getProducts().subscribe(prods=>{
+      //   this.products = prods
+      // })
+    
+      this.productsService.getProducts()
+      .pipe(takeUntil(this.endSub$))
+      .subscribe(prods=>{
         this.products = prods
       })
     }

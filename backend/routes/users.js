@@ -68,8 +68,6 @@ router.put('/:id',async (req, res)=> {
     res.send(user);
 })
 
-
-
 //login
 router.post('/login', async (req,res) => {
     const user = await User.findOne({email: req.body.email})
@@ -89,8 +87,7 @@ router.post('/login', async (req,res) => {
         res.status(200).send({user: user.email , token: token}) 
     } else {
         res.status(400).send('password is wrong!');
-    }
-    
+    }    
 })
 
 
@@ -131,7 +128,7 @@ router.delete('/:id', (req, res)=>{
 
 //get counts of users
 router.get(`/get/count`, async (req, res) =>{
-    const userCount = await User.countDocuments((count) => count)
+    const userCount = await User.countDocuments()
 
     if(!userCount) {
         res.status(500).json({success: false})
