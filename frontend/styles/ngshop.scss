@@ -1,5 +1,5 @@
 // Base Config
-// @import '~normalize.css/normalize.css';
+@import '~normalize.css/normalize.css';
 @import './base/colors.scss';
 @import './base/fonts.scss';
 @import './base/mixins.scss';
@@ -9,8 +9,8 @@
 @import '~primeicons/primeicons.css';
 @import '~primeng/resources/themes/saga-blue/theme.css';
 @import '~primeng/resources/primeng.min.css';
-@import 'primeflex/primeflex.scss';
-// @import '~animate.css/animate.css';
+@import '~primeflex/primeflex.css';
+@import '~animate.css/animate.css';
 
 @import './base/configuration.scss';
 
@@ -30,8 +30,9 @@
 @import './libs/ui/ui.scss';
 
 .container {
-    width: 1200px;
+    max-width: 1200px;
+    width: 89%;
     padding: 15px;
     margin: 0 auto;
     background-color: var(--surface-100);
-}
+}   
