@@ -3,6 +3,7 @@
   width: 100%;
   background-color: #deeef6;
   border-radius: 15px;
+  margin-top: 10px;
 
   &-text {
     color: var(--surface-700);
@@ -26,7 +27,7 @@
     text-align: center;
 
     img {
-      width: 40%;
+      width: 200px;
     }
   }
 
