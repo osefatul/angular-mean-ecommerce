@@ -1,30 +1,20 @@
 header {
-  margin-bottom: 25px;
+  height: 80px;
+
   .logo {
     .logoImg{
       border: black;
       border-radius: 50%;
     }
     img {
-      width: 80px;
+      width: 40px;
     }
   }
 
-  .search {
-    padding-top: 25px;
-
-  }
-
-  .navigation {
-    padding-top: 25px;
-  }
-
   .tools {
-    padding-top: 20px;
-
     .pi {
       margin-right: 15px;
-      font-size: 20px;
+      font-size: 14px;
       color: var(--surface-500);
       cursor: pointer;
       &:hover {
