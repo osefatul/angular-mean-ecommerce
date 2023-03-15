@@ -1,13 +1,18 @@
 header {
   margin-bottom: 25px;
   .logo {
+    .logoImg{
+      border: black;
+      border-radius: 50%;
+    }
     img {
-      width: 160px;
+      width: 80px;
     }
   }
 
   .search {
     padding-top: 25px;
+
   }
 
   .navigation {
@@ -15,10 +20,23 @@ header {
   }
 
   .tools {
-    padding-top: 38px;
+    padding-top: 20px;
 
     .pi {
-      margin-right: 10px;
+      margin-right: 15px;
+      font-size: 20px;
+      color: var(--surface-500);
+      cursor: pointer;
+      &:hover {
+        color: $primary-color;
+      }
     }
+  }
+
+
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

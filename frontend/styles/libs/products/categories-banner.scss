@@ -7,8 +7,9 @@
   }
 
   .category {
-    min-height: 100px;
+    min-height: 60px;
     border-radius: 14px;
+    // width: 7rem;
     text-align: center;
     display: flex;
     background-color: var(--surface-700);
@@ -16,10 +17,11 @@
     align-items: center;
     flex-direction: column;
     cursor: pointer;
+
     &-icon {
       .pi {
-        font-size: 2em;
-        margin-bottom: 10px;
+        font-size: 1.2em;
+        margin-bottom: 5px;
       }
     }
 

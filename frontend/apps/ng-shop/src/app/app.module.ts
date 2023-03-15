@@ -11,6 +11,9 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { AccordionModule } from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav.component';
+import { ProductsModule } from '@ecommerce/products';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -24,9 +27,11 @@ import { NavComponent } from './shared/nav/nav.component';
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
-    UiModule,
+    HttpClientModule,
+    ProductsModule,
     AccordionModule,
     BrowserAnimationsModule,
+    UiModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

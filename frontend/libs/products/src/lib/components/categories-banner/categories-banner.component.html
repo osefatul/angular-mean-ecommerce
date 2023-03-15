@@ -1,0 +1,19 @@
+<div class="categories-banner">
+  <h3 class="">Categories</h3>
+  <div class="grid">
+    <p-carousel class="col-12" [value]="categories" [numVisible]="8" [autoplayInterval]="2000" [circular]="true">
+      <ng-template let-category pTemplate="item" >
+        <div
+        class="category  mr-3"
+        [routerLink]="'/products/category/' + category.id"
+        [ngStyle]="{ backgroundColor: category.color }"
+        >
+          <div class="category-icon">
+            <i class="pi pi-{{ category.icon }}"></i>
+          </div>
+          <div class="category-name">{{ category.name }}</div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>

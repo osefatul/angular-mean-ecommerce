@@ -5,12 +5,12 @@
 @import './base/mixins.scss';
 
 //Libraries
-@import 'bootstrap/scss/bootstrap';
+// @import 'bootstrap/scss/bootstrap';
 @import '~primeicons/primeicons.css';
 @import '~primeng/resources/themes/saga-blue/theme.css';
 @import '~primeng/resources/primeng.min.css';
 @import '~primeflex/primeflex.css';
-@import '~animate.css/animate.css';
+@import 'animate.css/animate.css';
 
 @import './base/configuration.scss';
 
@@ -29,10 +29,16 @@
 @import './libs/users/users.scss';
 @import './libs/ui/ui.scss';
 
+
+
 .container {
     max-width: 1200px;
-    width: 89%;
-    padding: 15px;
+    width: 88%;
     margin: 0 auto;
     background-color: var(--surface-100);
+    // height: 100vh;
+
+    .subContainer{
+        // padding: 15px;
+    }
 }   

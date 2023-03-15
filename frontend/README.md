@@ -44,6 +44,9 @@
     ```javascript
         "@env/*":["environments/*"]
     ```
+- primeNG library for style.
+- primeFlex for grid styling.
+- The best thing about using primeNG is that you can use tailwind kind of inline styles as well.
 
 ## Admin App:
 - create an admin application using `nx generate @nrwl/angular:app admin` or use NX extensions for generating new application.
