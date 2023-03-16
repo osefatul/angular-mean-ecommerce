@@ -5,6 +5,7 @@
   <div class="images">
     <ul>
       <li
+        class="cursor-pointer"
         *ngFor="let imageUrl of images"
         (click)="changeSelectedImage(imageUrl)"
         [ngStyle]="{ 'background-image': 'url(' + imageUrl + ')' }"

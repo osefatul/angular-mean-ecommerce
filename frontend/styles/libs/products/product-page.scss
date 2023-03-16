@@ -12,7 +12,7 @@
   }
 
   &-price {
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: 600;
     border-bottom: 1px solid var(--surface-300);
     padding: 25px 0;
@@ -21,6 +21,7 @@
       font-size: 0.7em;
       margin-left: 10px;
       font-weight: 200;
+
       color: var(--surface-500);
       text-decoration: line-through;
     }
@@ -30,7 +31,7 @@
     margin: 25px 0;
 
     label {
-      font-size: 1.2em;
+      font-size: 1em;
     }
 
     .p-button {
