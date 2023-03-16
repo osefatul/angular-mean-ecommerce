@@ -24,11 +24,14 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      params['categoryid'] ? 
-      this._getProducts([params['categoryid']]) :
+
+      console.log(params['categoryId'])
+
+      params['categoryId']? 
+      this._getProducts([params['categoryId']]) :
       this._getProducts();
 
-      params['categoryid'] ? 
+      params['categoryId'] ? 
       (this.isCategoryPage = true) : 
       (this.isCategoryPage = false);
     });
@@ -54,5 +57,4 @@ export class ProductsListComponent implements OnInit {
       .map((category) => category.id);
     this._getProducts(selectedCategories);
   }
-
 }

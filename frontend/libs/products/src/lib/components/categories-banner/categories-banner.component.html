@@ -4,8 +4,8 @@
     <p-carousel class="col-12" [value]="categories" [numVisible]="8" [autoplayInterval]="2000" [circular]="true">
       <ng-template let-category pTemplate="item" >
         <div
-        class="category  mr-3"
-        [routerLink]="'/products/category/' + category.id"
+        class="category mr-3"
+        [routerLink]="'/category/' + category.id"
         [ngStyle]="{ backgroundColor: category.color }"
         >
           <div class="category-icon">
