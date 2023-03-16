@@ -9,6 +9,7 @@ export const CART_KEY = 'cart';
 })
 export class CartService {
 
+  //Behavior subject listens to cart, if it changes, the value will populate or re-render wherever it is subscribe to.
   cart$: BehaviorSubject<Cart> = new BehaviorSubject(this.getCart());
 
   initCartLocalStorage (){
