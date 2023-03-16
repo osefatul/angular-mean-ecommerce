@@ -23,7 +23,7 @@
   }
 
   &-image {
-    padding: 15px 0 0 0;
+    padding: 35px 0 0 0;
     text-align: center;
 
     img {
@@ -36,7 +36,7 @@
     color: $primary-color;
     border: 0;
     border-radius: 13px;
-    height: 50px;
+    height: 35px;
 
     &:enabled:hover {
       background-color: var(--surface-0);
