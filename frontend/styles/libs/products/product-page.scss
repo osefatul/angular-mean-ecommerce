@@ -16,6 +16,7 @@
     font-weight: 600;
     border-bottom: 1px solid var(--surface-300);
     padding: 25px 0;
+    color: green;
 
     .price-before {
       font-size: 0.7em;
@@ -23,7 +24,9 @@
       font-weight: 200;
 
       color: var(--surface-500);
+      // color: rgba(226, 89, 89, 0.324);
       text-decoration: line-through;
+      text-decoration-color: red;
     }
   }
 
