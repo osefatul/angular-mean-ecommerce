@@ -1,4 +1,6 @@
-import { UiModule } from './../../../../libs/ui/src/lib/ui.module';
+import { UiModule } from '@ecommerce/ui';
+import { OrdersModule } from '@ecommerce/orders';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     HttpClientModule,
+    OrdersModule,
     ProductsModule,
     AccordionModule,
     BrowserAnimationsModule,

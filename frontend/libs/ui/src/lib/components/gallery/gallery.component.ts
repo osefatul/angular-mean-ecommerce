@@ -7,11 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class GalleryComponent implements OnInit {
   selectedImageUrl!: string;
-  @Input () images!: string[]
+  @Input () images: string[] | any
 
   
   ngOnInit(): void {
-    if (this.hasImages) {
+    if (this.hasImages()) {
       this.selectedImageUrl = this.images[0];
     }
   }
@@ -20,7 +20,8 @@ export class GalleryComponent implements OnInit {
     this.selectedImageUrl = imageUrl;
   }
 
-  get hasImages() {
+  //or you can use `get` and make it look like a property.
+  hasImages() {
     return this.images?.length > 0;
   }
 }
