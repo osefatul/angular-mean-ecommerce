@@ -77,5 +77,4 @@ export class CartService {
     localStorage.setItem(CART_KEY, cartJsonString);
     this.cart$.next(cart);
   }
-
 }
