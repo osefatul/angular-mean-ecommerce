@@ -14,6 +14,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from '@ecommerce/products';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -33,6 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     AccordionModule,
     BrowserAnimationsModule,
     UiModule,
+    ToastModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],

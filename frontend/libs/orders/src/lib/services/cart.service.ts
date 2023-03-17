@@ -42,8 +42,7 @@ export class CartService {
 
 
   setCartItem(cartItem: CartItem, updateCartItem?: boolean): Cart {
-    console.log(cartItem)
-
+    // console.log(cartItem)
     const cart = this.getCart();
     const cartItemExist = cart.items?.find((item) => item.productId === cartItem.productId);
     if (cartItemExist) {
