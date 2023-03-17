@@ -13,7 +13,7 @@ import { ProductsService } from '../../services/products.service';
 export class ProductPageComponent implements OnInit, OnDestroy  {
   product!: Product;
   endSubs$: Subject<any> = new Subject();
-  quantity!: number;
+  quantity = 1;
 
 
   constructor(private prodService: ProductsService, private route: ActivatedRoute) {}
