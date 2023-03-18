@@ -15,6 +15,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
+import { AuthGuard } from '@ecommerce/users';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { OrderSummaryComponent } from './components/order-summary/order-summary.
     ThankYouComponent,
     OrderSummaryComponent,
   ],
+  providers: [AuthGuard],
   exports: [
     CartIconComponent,
     CartPageComponent,

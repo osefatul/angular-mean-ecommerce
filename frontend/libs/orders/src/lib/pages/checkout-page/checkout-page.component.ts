@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '@ecommerce/users';
 import { Cart } from '../../models/cart';
@@ -8,19 +8,29 @@ import { OrderItem } from '../../models/order-item';
 import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
 import { ORDER_STATUS } from '../../order.constants';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'orders-checkout-page',
   templateUrl: './checkout-page.component.html',
   styles: [],
 })
-export class CheckoutPageComponent implements OnInit {
-  checkoutFormGroup: FormGroup | undefined;
-  isSubmitted = false;
-  orderItems: OrderItem[] = [];
-  userId = '640ef38e1a2c1d8aa6be7629';
-  countries = [];
 
+export class CheckoutPageComponent implements OnInit, OnDestroy {
+  
+  
+  
+  checkoutFormGroup = new FormGroup({
+    name: new FormControl ('', [Validators.required]),
+    email: new FormControl ('', [Validators.email,Validators.required]),
+    phone: new FormControl ('', [Validators.required]),
+    city: new FormControl ('', [Validators.required]),
+    country: new FormControl ('', [Validators.required]),
+    zip: new FormControl ('', [Validators.required]),
+    apartment: new FormControl ('', [Validators.required]),
+    street: new FormControl ('', [Validators.required]),
+  });
+  
   constructor(
     private router: Router,
     private usersService: UsersService,
@@ -29,23 +39,51 @@ export class CheckoutPageComponent implements OnInit {
     private ordersService: OrdersService
   ) {}
 
+
+  // checkoutFormGroup!: FormGroup;
+  isSubmitted = false;
+  orderItems: OrderItem[] = [];
+  userId: string;
+  countries = [];
+  unsubscribe$: Subject<any> = new Subject();
+
+
   ngOnInit(): void {
-    this._initCheckoutForm();
+    // this._initCheckoutForm();
+    this._autoFillUserData();
     this._getCartItems();
     this._getCountries();
   }
 
-  private _initCheckoutForm() {
-    this.checkoutFormGroup = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.email, Validators.required]],
-      phone: ['', Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-      zip: ['', Validators.required],
-      apartment: ['', Validators.required],
-      street: ['', Validators.required]
-    });
+  ngOnDestroy() {
+    // this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+
+  get checkoutForm() {
+    return this.checkoutFormGroup?.controls;
+  }
+
+  private _autoFillUserData() {
+    console.log("checking autoFiller")
+    this.usersService
+      .observeCurrentUser()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((user) => {
+        console.log(user)
+        if (user) {
+          this.userId = user?.id;
+          this.checkoutForm['name'].setValue(user.name);
+          this.checkoutForm['email'].setValue(user?.email);
+          this.checkoutForm['phone'].setValue(user?.phone);
+          this.checkoutForm['city'].setValue(user?.city);
+          this.checkoutForm['street'].setValue(user?.street);
+          this.checkoutForm['country'].setValue(user?.country);
+          this.checkoutForm['zip'].setValue(user?.zip);
+          this.checkoutForm['apartment'].setValue(user?.apartment);
+        }
+      });
   }
 
   private _getCartItems() {
@@ -56,8 +94,8 @@ export class CheckoutPageComponent implements OnInit {
         quantity: item.quantity
       };
     });
-    console.log(cart.items)
-    console.log(this.orderItems)
+    // console.log(cart.items)
+    // console.log(this.orderItems)
   }
 
   private _getCountries() {
@@ -73,7 +111,6 @@ export class CheckoutPageComponent implements OnInit {
     if (this.checkoutFormGroup.invalid) {
       return;
     }
-
     const order: Order = {
       orderItems: this.orderItems,
       shippingAddress1: this.checkoutForm['street']?.value,
@@ -99,8 +136,6 @@ export class CheckoutPageComponent implements OnInit {
       });
   }
 
-  get checkoutForm() {
-    return this.checkoutFormGroup?.controls;
-  }
+
 
 }

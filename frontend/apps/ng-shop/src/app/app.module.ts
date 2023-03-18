@@ -1,3 +1,5 @@
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { UiModule } from '@ecommerce/ui';
 import { OrdersModule } from '@ecommerce/orders';
 
@@ -13,12 +15,12 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { AccordionModule } from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from '@ecommerce/products';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessagesComponent } from './shared/messages/messages.component';
 import { MessageService } from 'primeng/api';
-import { UsersModule } from '@ecommerce/users';
-
+import { JwtInterceptor, UsersModule } from '@ecommerce/users';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -33,15 +35,24 @@ import { UsersModule } from '@ecommerce/users';
     BrowserModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     HttpClientModule,
+    StoreModule.forRoot({}),//for ngrx-state store
+    EffectsModule.forRoot([]),//for ngrx-state effects
     OrdersModule,
     ProductsModule,
     AccordionModule,
     BrowserAnimationsModule,
     UiModule,
     UsersModule,
-    ToastModule
+    ToastModule,
+    StoreDevtoolsModule.instrument({
+      name: 'NgRx Demo App',
+      // logOnly: environment.production
+    })
   ],
-  providers: [MessageService],
+  providers: [
+    MessageService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   exports: [NavComponent],
 })

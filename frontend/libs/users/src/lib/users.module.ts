@@ -7,7 +7,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import * as fromUsers from './+state/users.reducer';
+import { UsersEffects } from './+state/users.effects';
+import { UsersFacade } from './+state/users.facade';
 
 @NgModule({
   imports: [
@@ -15,10 +19,12 @@ import { ButtonModule } from 'primeng/button';
     RouterModule.forChild(usersRoutes),
     InputTextModule,
     ButtonModule,
-    ReactiveFormsModule, 
-    FormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    StoreModule.forFeature(fromUsers.USERS_FEATURE_KEY, fromUsers.reducer),
+    EffectsModule.forFeature([UsersEffects])
   ],
   declarations: [LoginComponent],
-
+  providers: [UsersFacade],
 })
 export class UsersModule {}
