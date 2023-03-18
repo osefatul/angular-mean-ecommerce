@@ -60,7 +60,6 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-
   get checkoutForm() {
     return this.checkoutFormGroup?.controls;
   }

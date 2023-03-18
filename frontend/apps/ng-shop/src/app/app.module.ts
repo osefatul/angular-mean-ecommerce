@@ -51,7 +51,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   ],
   providers: [
     MessageService,
-    UsersFacade,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

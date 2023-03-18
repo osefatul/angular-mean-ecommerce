@@ -38,6 +38,9 @@ import { OrdersListComponent } from './pages/orders/orders-list/orders-list.comp
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import {FieldsetModule} from 'primeng/fieldset';
 import { JwtInterceptor, UsersModule } from '@ecommerce/users';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { OrdersModule } from '@ecommerce/orders';
 
 
 const UX_MODULE = [
@@ -78,11 +81,14 @@ const UX_MODULE = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
+    StoreModule.forRoot({}),//for ngrx-state store
+    EffectsModule.forRoot([]),//for ngrx-state effects
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     UX_MODULE,
     UsersModule,
+    OrdersModule
   ],
   providers: [
     CategoriesService, 
