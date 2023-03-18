@@ -9,6 +9,7 @@ import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
 import { ORDER_STATUS } from '../../order.constants';
 import { Subject, takeUntil } from 'rxjs';
+import { StripeService } from 'ngx-stripe';
 
 @Component({
   selector: 'orders-checkout-page',
@@ -36,7 +37,8 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     private usersService: UsersService,
     private formBuilder: FormBuilder,
     private cartService: CartService,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private stripeService: StripeService
   ) {}
 
 
@@ -93,8 +95,6 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
         quantity: item.quantity
       };
     });
-    // console.log(cart.items)
-    // console.log(this.orderItems)
   }
 
   private _getCountries() {
@@ -110,6 +110,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     if (this.checkoutFormGroup.invalid) {
       return;
     }
+
     const order: Order = {
       orderItems: this.orderItems,
       shippingAddress1: this.checkoutForm['street']?.value,
@@ -122,19 +123,14 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       user: this.userId,
       dateOrdered: `${Date.now()}`
     };
+    
+    this.ordersService.cacheOrderData(order)
 
-    this.ordersService.createOrder(order).subscribe({
-      next:() => {
-        //redirect to thank you page // payment
-        this.cartService.emptyCart();
-        this.router.navigate(['/success']);
-      },
-      error:() => {
-      //display some message to user
+    this.ordersService.createCheckoutSession(this.orderItems).subscribe(error =>{
+      if(error){
+        console.log("error in redirect to payment")
       }
-      });
+    })
+
   }
-
-
-
 }

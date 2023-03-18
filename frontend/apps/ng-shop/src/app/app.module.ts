@@ -21,6 +21,9 @@ import { MessagesComponent } from './shared/messages/messages.component';
 import { MessageService } from 'primeng/api';
 import { JwtInterceptor, UsersFacade, UsersModule } from '@ecommerce/users';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NgxStripeModule } from 'ngx-stripe';
+
+
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     UiModule,
     UsersModule,
     ToastModule,
+    NgxStripeModule.forRoot("pk_test_51Lk5fxJXwXjcmUVPC4DvlU9FnpFuao2YlLuMhPuEULHtOk8tVrLYhoGdZHYF8Vczc0rse6UeOzb8USJ2qoaQFGH100818JkF64"),
     StoreDevtoolsModule.instrument({
       name: 'NgRx Demo App',
       // logOnly: environment.production

@@ -2,6 +2,8 @@ const {Order} = require('../models/orders');
 const express = require('express');
 const { OrderItem } = require('../models/order-items');
 const router = express.Router();
+const { Product } = require('../models/products');
+const stripe = require('stripe')('sk_test_51Lk5fxJXwXjcmUVPbmkS0fu9aCefPpOqzB1gsVbaOZxZ3lHR9V3EzZFKHWfM3HIX0E0wfm5Tcil62D4y6bZZ1n4t00nAvdvE7S');
 
 
 //get all orders
@@ -32,7 +34,7 @@ router.get(`/:id`, async (req, res) =>{
 
 //add an order
 router.post('/', async (req,res)=>{
-    const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
+    const orderItemsIds = Promise.all(req.body.orderItems?.map(async (orderItem) =>{
         let newOrderItem = new OrderItem({
             quantity: orderItem.quantity,
             product: orderItem.product
@@ -67,6 +69,42 @@ router.post('/', async (req,res)=>{
     return res.status(400).send('the order cannot be created!')
     res.send(order);
 })
+
+
+
+router.post('/create-checkout-session', async (req, res) => {
+    const orderItems = req.body;
+
+    if (!orderItems) {
+        return res.status(400).send('checkout session cannot be created - check the order items');
+    }
+    const lineItems = await Promise.all(
+        orderItems.map(async (orderItem) => {
+            const product = await Product.findById(orderItem.product);
+            return {
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: product.name
+                    },
+                    unit_amount: product.price * 100
+                },
+                quantity: orderItem.quantity
+            };
+        })
+    );
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: lineItems,
+        mode: 'payment',
+        success_url: 'http://localhost:4200/success',
+        cancel_url: 'http://localhost:4200/error'
+    });
+
+    res.json({ id: session.id });
+});
+
+
 
 
 router.put('/:id',async (req, res)=> {

@@ -41,6 +41,7 @@ import { JwtInterceptor, UsersModule } from '@ecommerce/users';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { OrdersModule } from '@ecommerce/orders';
+import { NgxStripeModule } from 'ngx-stripe';
 
 
 const UX_MODULE = [
@@ -59,7 +60,7 @@ const UX_MODULE = [
   EditorModule,
   TagModule,
   InputMaskModule,
-  FieldsetModule
+  FieldsetModule,
 ];
 
 @NgModule({
@@ -88,7 +89,8 @@ const UX_MODULE = [
     ReactiveFormsModule,
     UX_MODULE,
     UsersModule,
-    OrdersModule
+    OrdersModule,
+    NgxStripeModule.forRoot("pk_test_51Lk5fxJXwXjcmUVPC4DvlU9FnpFuao2YlLuMhPuEULHtOk8tVrLYhoGdZHYF8Vczc0rse6UeOzb8USJ2qoaQFGH100818JkF64"),
   ],
   providers: [
     CategoriesService, 
