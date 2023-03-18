@@ -15,6 +15,9 @@ import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from '@ecommerce/products';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
+import { MessagesComponent } from './shared/messages/messages.component';
+import { MessageService } from 'primeng/api';
+import { UsersModule } from '@ecommerce/users';
 
 
 @NgModule({
@@ -24,6 +27,7 @@ import { ToastModule } from 'primeng/toast';
     HeaderComponent,
     FooterComponent,
     NavComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -34,10 +38,10 @@ import { ToastModule } from 'primeng/toast';
     AccordionModule,
     BrowserAnimationsModule,
     UiModule,
+    UsersModule,
     ToastModule
-
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent],
   exports: [NavComponent],
 })
