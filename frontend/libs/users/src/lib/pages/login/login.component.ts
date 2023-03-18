@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { UsersService } from '../../services/users.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private localStorageService:LocalStorageService
+    private localStorageService:LocalStorageService,
+    private usersService:UsersService
   ){}
 
   loginForm = new FormGroup({
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit {
         // console.log(user)
         this.authError = false;
         this.localStorageService.setToken(user.token);
+        this.usersService.initAppSession()// we are running the effect for state here.
         this.router.navigateByUrl("/")
       },
       error: (error: HttpErrorResponse) => {

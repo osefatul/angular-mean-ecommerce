@@ -16,6 +16,7 @@ export class UsersEffects {
       concatMap(() => {
         if (this.localStorageService.isValidToken()) {
           const userId = this.localStorageService.getUserIdFromToken();
+          console.log("check user", userId)
           if (userId) {
             return this.usersService.getUser(userId).pipe(
               map((user) => {
