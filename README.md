@@ -1,3 +1,3 @@
 # MEAN Full Stack E-commerce
 ### Intro
-This is an advanced web application built fundamentally the mean stack. 
+This fullstack web application is built using the mean stack. 
