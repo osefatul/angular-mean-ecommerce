@@ -45,7 +45,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   // checkoutFormGroup!: FormGroup;
   isSubmitted = false;
   orderItems: OrderItem[] = [];
-  userId: string;
+  userId!: string;
   countries = [];
   unsubscribe$: Subject<any> = new Subject();
 
@@ -72,7 +72,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       .observeCurrentUser()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((user) => {
-        console.log(user)
+        // console.log(user)
         if (user) {
           this.userId = user?.id;
           this.checkoutForm['name'].setValue(user.name);

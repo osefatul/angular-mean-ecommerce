@@ -4,8 +4,8 @@ const { OrderItem } = require('../models/order-items');
 const router = express.Router();
 const { Product } = require('../models/products');
 const stripe = require('stripe')('sk_test_51Lk5fxJXwXjcmUVPbmkS0fu9aCefPpOqzB1gsVbaOZxZ3lHR9V3EzZFKHWfM3HIX0E0wfm5Tcil62D4y6bZZ1n4t00nAvdvE7S');
-
-
+const crypto = require('crypto');
+const {Token} = require('../models/successToken')
 //get all orders
 router.get(`/`, async (req, res) =>{
     const orderList = await Order.find().populate('user', 'name').sort({'dateOrdered': -1});
@@ -75,6 +75,10 @@ router.post('/', async (req,res)=>{
 router.post('/create-checkout-session', async (req, res) => {
     const orderItems = req.body;
 
+    const generateToken = ()=>{
+        return crypto.randomBytes(20).toString('hex');
+    }
+
     if (!orderItems) {
         return res.status(400).send('checkout session cannot be created - check the order items');
     }
@@ -100,6 +104,12 @@ router.post('/create-checkout-session', async (req, res) => {
         success_url: 'http://localhost:4200/success',
         cancel_url: 'http://localhost:4200/error'
     });
+
+    //create token for success page
+    new Token ({
+        generateToken,
+        userId: req.body.userId
+    })
 
     res.json({ id: session.id });
 });

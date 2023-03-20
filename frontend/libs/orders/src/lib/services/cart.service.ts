@@ -60,7 +60,6 @@ export class CartService {
     } else {
       cart.items?.push(cartItem);
     }
-
     const cartJson = JSON.stringify(cart);
     localStorage.setItem(CART_KEY, cartJson);
     this.cart$.next(cart);

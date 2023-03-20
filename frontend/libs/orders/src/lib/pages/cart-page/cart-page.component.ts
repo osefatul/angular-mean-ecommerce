@@ -71,6 +71,4 @@ export class CartPageComponent implements OnInit, OnDestroy  {
       true
     );
   }
-
-
 }
